@@ -1,0 +1,11 @@
+{
+  "name": "mysql-tcp-proxy",
+  "version": "1.0.0",
+  "description": "Proxy TCP simples para MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}
+

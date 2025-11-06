@@ -1,0 +1,127 @@
+╔════════════════════════════════════════════════════════════════╗
+║         🚀 GUIA RÁPIDO - CONSULTINGCAST APP                  ║
+╚════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════
+PARTE 1: COMO VOLTAR A ABRIR DEPOIS DE DESLIGAR O PC
+═══════════════════════════════════════════════════════════════════
+
+📌 PASSO A PASSO:
+
+1. Executa: scripts\INICIAR-TUDO.bat
+
+2. O script vai:
+   ✅ Limpar processos antigos
+   ✅ Iniciar API Node.js
+   ✅ Criar túnel com localtunnel
+   ✅ Obter IP público automaticamente
+   ✅ Abrir browser para desbloquear túnel
+
+3. Quando aparecer a página pedindo senha:
+   ✅ Cola o IP que aparece no terminal
+   ✅ Clica em "Continue"
+
+4. Pronto! A app vai abrir no Chrome automaticamente.
+
+⚠️ IMPORTANTE:
+   - Cada vez que reinicias o PC, precisas de criar um novo túnel
+   - O localtunnel gera URLs diferentes cada vez
+   - O script atualiza tudo automaticamente!
+
+═══════════════════════════════════════════════════════════════════
+PARTE 2: COMO COLOCAR ONLINE SEM PC LIGADO
+═══════════════════════════════════════════════════════════════════
+
+Para ter a app SEMPRE online (sem precisar do PC):
+
+OPÇÃO 1: Railway.app ⭐ RECOMENDADO (Mais fácil)
+═══════════════════════════════════════════════════════════════════
+✅ Grátis: $5 créditos/mês
+✅ Deploy automático via GitHub
+✅ Suporta Node.js + Flutter Web
+✅ SSL automático (HTTPS)
+
+PASSOS:
+1. Cria conta: https://railway.app
+2. Conecta GitHub (repositório com o código)
+3. Adiciona serviços:
+   - API Node.js (detecta automaticamente)
+   - Flutter Web (upload de build/web)
+4. Configura variáveis:
+   - DB_HOST: 10.1.55.10
+   - DB_PORT: 3306
+   - DB_USER: luis
+   - DB_PASSWORD: Admin1234
+5. Deploy automático!
+
+OPÇÃO 2: Render.com
+═══════════════════════════════════════════════════════════════════
+✅ Grátis: 750 horas/mês
+✅ SSL automático
+⚠️ Hiberna após 15min sem uso
+
+OPÇÃO 3: Fly.io
+═══════════════════════════════════════════════════════════════════
+✅ Grátis: 3 VMs
+✅ Muito rápido
+✅ Suporta Docker
+
+OPÇÃO 4: Combo (API + Frontend separados)
+═══════════════════════════════════════════════════════════════════
+✅ API Node.js → Railway ou Fly.io
+✅ Flutter Web → Vercel ou Netlify
+✅ Mais flexível e rápido
+
+═══════════════════════════════════════════════════════════════════
+O QUE PRECISAS PARA DEPLOY
+═══════════════════════════════════════════════════════════════════
+
+1. Conta GitHub (se não tiver: https://github.com)
+2. Código no repositório GitHub
+3. Base de dados MySQL acessível na internet (10.1.55.10)
+
+═══════════════════════════════════════════════════════════════════
+COMPARAÇÃO: DESENVOLVIMENTO vs PRODUÇÃO
+═══════════════════════════════════════════════════════════════════
+
+┌─────────────────────┬──────────────────┬──────────────────┐
+│                     │  DESENVOLVIMENTO │    PRODUÇÃO      │
+├─────────────────────┼──────────────────┼──────────────────┤
+│ Usar                 │ INICIAR-TUDO.bat │ Railway/Render   │
+│ PC precisa ligado?   │ SIM              │ NÃO              │
+│ URL muda?            │ SIM (cada vez)   │ NÃO (fixa)       │
+│ Custo                │ GRÁTIS          │ GRÁTIS (início)  │
+│ Para quem?           │ Testes          │ Clientes         │
+└─────────────────────┴──────────────────┴──────────────────┘
+
+═══════════════════════════════════════════════════════════════════
+DÚVIDAS FREQUENTES
+═══════════════════════════════════════════════════════════════════
+
+❓ Posso continuar a usar localtunnel?
+✅ Sim! Mas só funciona enquanto o PC está ligado.
+   Para produção, precisa de deploy permanente.
+
+❓ Quanto custa Railway?
+✅ Grátis para começar ($5 créditos/mês).
+   Depois paga apenas o que usar.
+
+❓ A base de dados precisa estar pública?
+✅ Sim, a Railway precisa de conseguir ligar-se a 10.1.55.10:3306.
+   Se for IP privado, pode precisar de VPN.
+
+❓ Posso usar a mesma base de dados?
+✅ Sim! Usa as mesmas credenciais na Railway.
+
+═══════════════════════════════════════════════════════════════════
+PRÓXIMOS PASSOS
+═══════════════════════════════════════════════════════════════════
+
+AGORA:    Continua a usar INICIAR-TUDO.bat para desenvolvimento
+DEPOIS:   Quando quiseres colocar online, segue o guia PARTE 2
+AJUDA:    Se precisares de ajuda com deploy, pede ajuda!
+
+═══════════════════════════════════════════════════════════════════
+Para mais detalhes, lê: GUIA-PARA-USAR.md
+═══════════════════════════════════════════════════════════════════
+

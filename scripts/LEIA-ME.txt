@@ -1,0 +1,45 @@
+========================================
+   ✅ SOLUÇÃO FINAL - TÚNEL SEM URL VISÍVEL
+========================================
+
+🎯 PROBLEMA:
+   O Cloudflare Tunnel não mostra a URL, mas funciona mesmo assim!
+
+💡 SOLUÇÃO:
+   Usa o script INICIAR-TUDO.bat que guarda a URL para reutilizar!
+
+📋 COMO FUNCIONA:
+
+   1. PRIMEIRA VEZ:
+      - Executa: INICIAR-TUDO.bat
+      - Quando pedir URL, cola a URL do túnel
+      - (Podes obter a URL em: https://trycloudflare.com)
+      - O script guarda a URL automaticamente
+
+   2. PRÓXIMAS VEZES:
+      - Executa: INICIAR-TUDO.bat
+      - Pergunta: "Queres usar esta URL? (S/N)"
+      - Responde: S (para usar a guardada)
+      - NÃO precisa criar novo túnel!
+
+✨ VANTAGENS:
+   - Só precisas colar a URL UMA VEZ
+   - Na próxima vez, usa a URL guardada
+   - Não precisa esperar pelo túnel mostrar a URL
+   - Funciona mesmo quando o túnel não mostra a URL
+
+🔧 SE O TÚNEL NÃO MOSTRAR URL:
+   1. O túnel está a funcionar mesmo assim!
+   2. Usa a URL que guardaste anteriormente
+   3. Ou cria uma nova em: https://trycloudflare.com
+   4. O script pergunta se queres usar a guardada
+
+📁 FICHEIRO COM URL:
+   - Localização: scripts\tunnel_url.txt
+   - Podes editar manualmente se quiseres mudar
+   - O script pergunta sempre antes de usar
+
+⚠️  IMPORTANTE:
+   - Mantém TODAS as janelas abertas!
+   - Se fechares uma janela, o serviço pára
+   - A primeira compilação pode demorar 3-5 minutos
