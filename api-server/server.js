@@ -378,9 +378,19 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Inicia servidor
-app.listen(PORT, () => {
-  console.log(`🚀 API a correr em http://localhost:${PORT}`);
+// Inicia servidor - Railway precisa de 0.0.0.0, não localhost!
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 API a correr em http://0.0.0.0:${PORT}`);
+  console.log(`📋 Endpoints disponíveis:`);
+  console.log(`   POST /login`);
+  console.log(`   POST /companies`);
+  console.log(`   POST /user/nifs`);
+  console.log(`   POST /companies/by-nifs`);
+  console.log(`   POST /sales/snapshot`);
+  console.log(`   GET  /health`);
+  console.log(`\n💡 Para produção, configura variáveis de ambiente:`);
+  console.log(`   DB_HOST, DB_PORT, DB_USER, DB_PASSWORD`);
+});
   console.log(`📋 Endpoints disponíveis:`);
   console.log(`   POST /login`);
   console.log(`   POST /companies`);
