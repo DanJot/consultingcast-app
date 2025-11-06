@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
@@ -31,7 +31,7 @@ app.post('/login', async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        error: 'Email e password são obrigatórios',
+        error: 'Email e password so obrigatrios',
       });
     }
     const dbName = database || 'consultingcast2';
@@ -43,7 +43,7 @@ app.post('/login', async (req, res) => {
         [email.trim()]
       );
       if (rows.length === 0) {
-        return res.json({ success: false, error: 'Credenciais inválidas' });
+        return res.json({ success: false, error: 'Credenciais invlidas' });
       }
       const user = rows[0];
       const storedPass = user.password || '';
@@ -60,7 +60,7 @@ app.post('/login', async (req, res) => {
         passwordMatches = storedPass === inputPass;
       }
       if (!passwordMatches) {
-        return res.json({ success: false, error: 'Credenciais inválidas' });
+        return res.json({ success: false, error: 'Credenciais invlidas' });
       }
       // Inferir nome do email
       const inferredName = user.email.includes('@')
@@ -93,13 +93,13 @@ app.post('/companies', async (req, res) => {
     if (!userId) {
       return res.status(400).json({
         success: false,
-        error: 'userId é obrigatório',
+        error: 'userId  obrigatrio',
       });
     }
     const dbName = database || 'efatura';
     const conn = await getConnection(dbName);
     try {
-      // Primeiro, vamos verificar se há empresas para esse userId
+      // Primeiro, vamos verificar se h empresas para esse userId
       const [checkRows] = await conn.execute(
         `SELECT COUNT(*) as total FROM fatura_credential WHERE id_user_cc = ?`,
         [userId]
@@ -152,7 +152,7 @@ app.post('/user/nifs', async (req, res) => {
     if (!userId) {
       return res.status(400).json({
         success: false,
-        error: 'userId é obrigatório',
+        error: 'userId  obrigatrio',
       });
     }
     const dbName = database || 'consultingcast2';
@@ -192,13 +192,13 @@ app.post('/companies/by-nifs', async (req, res) => {
     if (!nifs || !Array.isArray(nifs) || nifs.length === 0) {
       return res.status(400).json({
         success: false,
-        error: 'nifs é obrigatório e deve ser um array não vazio',
+        error: 'nifs  obrigatrio e deve ser um array no vazio',
       });
     }
     const dbName = database || 'efatura';
     const conn = await getConnection(dbName);
     try {
-      // Cria placeholders dinâmicos para IN clause
+      // Cria placeholders dinmicos para IN clause
       const placeholders = nifs.map(() => '?').join(',');
       
       // Busca empresas na tabela fatura_credential
@@ -239,7 +239,7 @@ app.post('/sales/snapshot', async (req, res) => {
     if (!database) {
       return res.status(400).json({
         success: false,
-        error: 'database é obrigatório',
+        error: 'database  obrigatrio',
       });
     }
     const dbName = normalizeDbName(database);
@@ -247,7 +247,7 @@ app.post('/sales/snapshot', async (req, res) => {
     try {
       let query, params;
       if (ano && mes) {
-        // Período específico
+        // Perodo especfico
         query = `SELECT ano, mes, VENDAS_AC AS vendas_acumuladas, 
                  VENDAS_N_1 AS vendas_mes_ano_anterior
                  FROM resultados_mensais 
@@ -255,10 +255,10 @@ app.post('/sales/snapshot', async (req, res) => {
                  LIMIT 1`;
         params = [ano, mes];
       } else {
-        // Modo automático (último período fechado ou corrente)
+        // Modo automtico (ltimo perodo fechado ou corrente)
         const useMode = mode || 'last_closed';
         if (useMode === 'last_closed') {
-          // Último período fechado (mês anterior ao atual)
+          // ltimo perodo fechado (ms anterior ao atual)
           const now = new Date();
           const targetMonth = now.getMonth(); // 0-11
           const targetYear = now.getFullYear();
@@ -271,7 +271,7 @@ app.post('/sales/snapshot', async (req, res) => {
                    LIMIT 1`;
           params = [prevYear, prevMonth];
         } else {
-          // current_mtd - mês atual
+          // current_mtd - ms atual
           const now = new Date();
           query = `SELECT ano, mes, VENDAS_AC AS vendas_acumuladas,
                    VENDAS_N_1 AS vendas_mes_ano_anterior
@@ -311,20 +311,20 @@ app.post('/sales/snapshot', async (req, res) => {
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'ok', 
-    message: 'API está a funcionar!',
+    message: 'API est a funcionar!',
     timestamp: new Date().toISOString()
   });
 });
 app.listen(PORT, () => {
-  console.log(`🚀 API a correr em http://localhost:${PORT}`);
-  console.log(`📋 Endpoints disponíveis:`);
+  console.log(` API a correr em http://localhost:${PORT}`);
+  console.log(` Endpoints disponveis:`);
   console.log(`   POST /login`);
   console.log(`   POST /companies`);
   console.log(`   POST /user/nifs`);
   console.log(`   POST /companies/by-nifs`);
   console.log(`   POST /sales/snapshot`);
   console.log(`   GET  /health`);
-  console.log(`\n💡 Para produção, configura variáveis de ambiente:`);
+  console.log(`\n Para produo, configura variveis de ambiente:`);
   console.log(`   DB_HOST, DB_PORT, DB_USER, DB_PASSWORD`);
 });
  
