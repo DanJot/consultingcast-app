@@ -391,13 +391,3 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`\nðŸ’¡ Para produÃ§Ã£o, configura variÃ¡veis de ambiente:`);
   console.log(`   DB_HOST, DB_PORT, DB_USER, DB_PASSWORD`);
 });
-  console.log(`ðŸ“‹ Endpoints disponÃ­veis:`);
-  console.log(`   POST /login`);
-  console.log(`   POST /companies`);
-  console.log(`   POST /user/nifs`);
-  console.log(`   POST /companies/by-nifs`);
-  console.log(`   POST /sales/snapshot`);
-  console.log(`   GET  /health`);
-  console.log(`\nðŸ’¡ Para produÃ§Ã£o, configura variÃ¡veis de ambiente:`);
-  console.log(`   DB_HOST, DB_PORT, DB_USER, DB_PASSWORD`);
-});
