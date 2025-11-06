@@ -391,5 +391,6 @@ app.listen(PORT, () => {
   console.log(`\n💡 Para produção, configura variáveis de ambiente:`);
   console.log(`   DB_HOST, DB_PORT, DB_USER, DB_PASSWORD`);
 });
-/ /   R a i l w a y   F i x   -   1 1 / 0 6 / 2 0 2 5   0 2 : 2 4 : 2 0  
+/ /   R a i l w a y   F i x   -   1 1 / 0 6 / 2 0 2 5   0 2 : 2 4 : 2 0 
+ 
  
