@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000; // Usa PORT do ambiente ou 3000
 
-// Configuração MySQL (lê do ambiente ou usa valores padrão)
+// ConfiguraÃ§Ã£o MySQL (lÃª do ambiente ou usa valores padrÃ£o)
 const DB_CONFIG = {
   host: process.env.DB_HOST || '10.1.55.10',
   port: parseInt(process.env.DB_PORT) || 3306,
@@ -18,7 +18,7 @@ const DB_CONFIG = {
 app.use(cors()); // Permite pedidos do browser
 app.use(express.json());
 
-// Helper: cria conexão MySQL
+// Helper: cria conexÃ£o MySQL
 async function getConnection(databaseName) {
   return mysql.createConnection({
     ...DB_CONFIG,
@@ -44,7 +44,7 @@ app.post('/login', async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        error: 'Email e password são obrigatórios',
+        error: 'Email e password sÃ£o obrigatÃ³rios',
       });
     }
 
@@ -59,7 +59,7 @@ app.post('/login', async (req, res) => {
       );
 
       if (rows.length === 0) {
-        return res.json({ success: false, error: 'Credenciais inválidas' });
+        return res.json({ success: false, error: 'Credenciais invÃ¡lidas' });
       }
 
       const user = rows[0];
@@ -79,7 +79,7 @@ app.post('/login', async (req, res) => {
       }
 
       if (!passwordMatches) {
-        return res.json({ success: false, error: 'Credenciais inválidas' });
+        return res.json({ success: false, error: 'Credenciais invÃ¡lidas' });
       }
 
       // Inferir nome do email
@@ -118,7 +118,7 @@ app.post('/companies', async (req, res) => {
     if (!userId) {
       return res.status(400).json({
         success: false,
-        error: 'userId é obrigatório',
+        error: 'userId Ã© obrigatÃ³rio',
       });
     }
 
@@ -126,7 +126,7 @@ app.post('/companies', async (req, res) => {
     const conn = await getConnection(dbName);
 
     try {
-      // Primeiro, vamos verificar se há empresas para esse userId
+      // Primeiro, vamos verificar se hÃ¡ empresas para esse userId
       const [checkRows] = await conn.execute(
         `SELECT COUNT(*) as total FROM fatura_credential WHERE id_user_cc = ?`,
         [userId]
@@ -188,7 +188,7 @@ app.post('/user/nifs', async (req, res) => {
     if (!userId) {
       return res.status(400).json({
         success: false,
-        error: 'userId é obrigatório',
+        error: 'userId Ã© obrigatÃ³rio',
       });
     }
 
@@ -237,7 +237,7 @@ app.post('/companies/by-nifs', async (req, res) => {
     if (!nifs || !Array.isArray(nifs) || nifs.length === 0) {
       return res.status(400).json({
         success: false,
-        error: 'nifs é obrigatório e deve ser um array não vazio',
+        error: 'nifs Ã© obrigatÃ³rio e deve ser um array nÃ£o vazio',
       });
     }
 
@@ -245,7 +245,7 @@ app.post('/companies/by-nifs', async (req, res) => {
     const conn = await getConnection(dbName);
 
     try {
-      // Cria placeholders dinâmicos para IN clause
+      // Cria placeholders dinÃ¢micos para IN clause
       const placeholders = nifs.map(() => '?').join(',');
       
       // Busca empresas na tabela fatura_credential
@@ -292,7 +292,7 @@ app.post('/sales/snapshot', async (req, res) => {
     if (!database) {
       return res.status(400).json({
         success: false,
-        error: 'database é obrigatório',
+        error: 'database Ã© obrigatÃ³rio',
       });
     }
 
@@ -303,7 +303,7 @@ app.post('/sales/snapshot', async (req, res) => {
       let query, params;
 
       if (ano && mes) {
-        // Período específico
+        // PerÃ­odo especÃ­fico
         query = `SELECT ano, mes, VENDAS_AC AS vendas_acumuladas, 
                  VENDAS_N_1 AS vendas_mes_ano_anterior
                  FROM resultados_mensais 
@@ -311,10 +311,10 @@ app.post('/sales/snapshot', async (req, res) => {
                  LIMIT 1`;
         params = [ano, mes];
       } else {
-        // Modo automático (último período fechado ou corrente)
+        // Modo automÃ¡tico (Ãºltimo perÃ­odo fechado ou corrente)
         const useMode = mode || 'last_closed';
         if (useMode === 'last_closed') {
-          // Último período fechado (mês anterior ao atual)
+          // Ãšltimo perÃ­odo fechado (mÃªs anterior ao atual)
           const now = new Date();
           const targetMonth = now.getMonth(); // 0-11
           const targetYear = now.getFullYear();
@@ -328,7 +328,7 @@ app.post('/sales/snapshot', async (req, res) => {
                    LIMIT 1`;
           params = [prevYear, prevMonth];
         } else {
-          // current_mtd - mês atual
+          // current_mtd - mÃªs atual
           const now = new Date();
           query = `SELECT ano, mes, VENDAS_AC AS vendas_acumuladas,
                    VENDAS_N_1 AS vendas_mes_ano_anterior
@@ -373,31 +373,31 @@ app.post('/sales/snapshot', async (req, res) => {
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'ok', 
-    message: 'API está a funcionar!',
+    message: 'API estÃ¡ a funcionar!',
     timestamp: new Date().toISOString()
   });
 });
 
-// Inicia servidor - Railway precisa de 0.0.0.0, não localhost!
+// Inicia servidor - Railway precisa de 0.0.0.0, nÃ£o localhost!
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 API a correr em http://0.0.0.0:${PORT}`);
-  console.log(`📋 Endpoints disponíveis:`);
+  console.log(`ðŸš€ API a correr em http://0.0.0.0:${PORT}`);
+  console.log(`ðŸ“‹ Endpoints disponÃ­veis:`);
   console.log(`   POST /login`);
   console.log(`   POST /companies`);
   console.log(`   POST /user/nifs`);
   console.log(`   POST /companies/by-nifs`);
   console.log(`   POST /sales/snapshot`);
   console.log(`   GET  /health`);
-  console.log(`\n💡 Para produção, configura variáveis de ambiente:`);
+  console.log(`\nðŸ’¡ Para produÃ§Ã£o, configura variÃ¡veis de ambiente:`);
   console.log(`   DB_HOST, DB_PORT, DB_USER, DB_PASSWORD`);
 });
-  console.log(`📋 Endpoints disponíveis:`);
+  console.log(`ðŸ“‹ Endpoints disponÃ­veis:`);
   console.log(`   POST /login`);
   console.log(`   POST /companies`);
   console.log(`   POST /user/nifs`);
   console.log(`   POST /companies/by-nifs`);
   console.log(`   POST /sales/snapshot`);
   console.log(`   GET  /health`);
-  console.log(`\n💡 Para produção, configura variáveis de ambiente:`);
+  console.log(`\nðŸ’¡ Para produÃ§Ã£o, configura variÃ¡veis de ambiente:`);
   console.log(`   DB_HOST, DB_PORT, DB_USER, DB_PASSWORD`);
 });
